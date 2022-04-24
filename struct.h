@@ -22,7 +22,7 @@ typedef struct {
 
 /*英雄*/
 typedef struct {
-	Attribute attruibute;			//属性
+	Attribute attribute;			//属性
 	Army army;						//军队
 	char name[nameLength];			//名字
 }Hero;

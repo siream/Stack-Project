@@ -1,10 +1,11 @@
-#define nameLength 20		//Ãû×Ö³¤¶È
-#define armyLength 20		//¾ü¶Ó³¤¶È
+ï»¿#define nameLength 20		//åå­—é•¿åº¦
+#define armyLength 20		//å†›é˜Ÿé•¿åº¦
 
-#define COL 120				//ÁĞ
-#define ROW 40				//ĞĞ
+#define COL 120				//åˆ—
+#define ROW 40				//è¡Œ
 
-#define TRUE 1				//ÊÇ
-#define FLASE 0				//·ñ
+#define TRUE 1				//æ˜¯
+#define FLASE 0				//å¦
 
-#define FRAME "¡è"			//±ß¿ò²ÄÖÊ
+#define SIDE "Â¤"			//è¾¹æ¡†æè´¨ï¼ˆå·¦å³ï¼‰
+#define TOP "*#"			//è¾¹æ¡†æè´¨ï¼ˆä¸Šä¸‹ï¼‰
