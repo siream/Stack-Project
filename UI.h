@@ -53,13 +53,15 @@ void InitFrame() {
 	system("CLS");
 	int color1 = 30;		//边框前景色(范围30-37)
 	int color2 = 43;		//边框后景色（范围40-47）
+	char top[3] = "¤";		//上下边框材质
+	char side[3] = "||";	//左右边框材质
 	for (int i = 1;i < COL;i++)
 		for (int j = 1;j <= ROW;j++) {
 			if (i == 1 || i == COL - 1)
-				printf("\33[%dm\33[%dm\33[%d;%dH%s\33[0m", color1, color2, j, i, TOP);
+				printf("\33[%dm\33[%dm\33[%d;%dH%s\33[0m", color1, color2, j, i, side);
 			else
 				if (j == 1 || j == ROW)
-					printf("\33[%dm\33[%dm\33[%d;%dH%s\33[0m", color1, color2, j, i, SIDE);
+					printf("\33[%dm\33[%dm\33[%d;%dH%s\33[0m", color1, color2, j, i, top);
 		}
 }
 
