@@ -1,8 +1,14 @@
+void InitHero(HeroList*);
+void InitDogface(DogfaceList*);
 /*³õÊ¼»¯Íæ¼Ò*/
 Player InitPlayer(char name[nameLength]) {
 	Player player;
-	player.gold = 0;
+	player.diamond = 0;
 	strcpy_s(player.name, name);
+	InitHero(&player.ownHero);
+	InitHero(&player.unHero);
+	InitDogface(&player.ownDogface);
+	InitDogface(&player.unDogface);
 	return player;
 }
 

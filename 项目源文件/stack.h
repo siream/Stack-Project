@@ -25,6 +25,18 @@ int StackEmpty(Army army) {
 	return FALSE;
 }
 /*ÈëÕ»*/
-int StackInsert(Army* army) {
-	
+int StackPush(Army* army,Dogface dogface) {
+	if (StackFull(*army))
+		return FALSE;
+	army->top++;
+	army->dogface[army->top] = dogface;
+	return TRUE;
+}
+/*³öÕ»*/
+int StackPop(Army* army, Dogface* dogface) {
+	if (StackEmpty(*army))
+		return FALSE;
+	*dogface = army->dogface[army->top];
+	army->top--;
+	return TRUE;
 }

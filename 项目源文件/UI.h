@@ -6,11 +6,42 @@ void JumpCursor(short, short);		//跳转光标至指定位置
 
 void InitFrame();					//初始化游戏边框
 
-Player Ready();				//开始界面
+Player Ready();						//开始界面
 
 void Menu(Player*);					//菜单界面
 
 void Error();						//错误界面
+
+/*菜单界面*/
+void Menu(Player* player) {
+	int x = 15;				//菜单位置
+	int y = 52;				//菜单位置
+	int distance = 3;		//菜单间隔
+	char choose;			//用户选择
+head:
+	InitFrame();
+	printf("\33[36m\33[%d;%dH尊贵的城主：%s", 5, 10, player->name);
+	printf("\33[%d;%dH您拥有的钻石：%d", 6, 10, player->diamond);
+	printf("\33[36m\33[%d;%dH请选择你要做什么", 10, 49);
+	printf("\33[34m\33[%d;%dH——————————————\33[0m", 11, 43);
+	printf("\33[36m\33[%d;%dH请输入1-3\33[0m", 12, 52);
+	printf("\33[36m\33[%d;%dHo————o", x - 1, y);
+	printf("\33[%d;%dH|  战斗  |", x, y);
+	printf("\33[%d;%dH*————*", x + 1, y);
+	printf("\33[%d;%dHo————o", x + distance - 1, y);
+	printf("\33[%d;%dH|  商店  |", x + distance, y);
+	printf("\33[%d;%dH*————*", x + distance + 1, y);
+	printf("\33[%d;%dHo————o", x + distance * 2 - 1, y);
+	printf("\33[%d;%dH|  退出  |", x + distance * 2, y);
+	printf("\33[%d;%dH*————*", x + distance * 2 + 1, y);
+	choose = _getch();
+	switch (choose) {
+	case '1':FightMenu(player);goto head;
+	case '2':ShopMenu(player);goto head;
+	case '3':return;
+	default:Error();goto head;
+	}
+}
 
 /*设置光标*/
 /*传入FALSE则隐藏光标*/
@@ -59,11 +90,12 @@ void InitFrame() {
 
 /*错误界面*/
 void Error() {
-	int x=ROW/2-3;
-	int y=46;
-	printf("\33[31m\33[%d;%dH*——————————*",x,y);
-	printf("\33[%d;%dH|！！！！！！！！！！|",x+1,y);
-	printf("\33[%d;%dH|！请输入正确的选项！|",x+2,y);
-	printf("\33[%d;%dH|！！！！！！！！！！|",x+3,y);
-	printf("\33[%d;%dH*——————————*", x+4, y);
+	int x = ROW / 2 - 3;
+	int y = 46;
+	printf("\33[31m\33[%d;%dH*——————————*", x, y);
+	printf("\33[%d;%dH|！！！！！！！！！！|", x + 1, y);
+	printf("\33[%d;%dH|！请输入正确的选项！|", x + 2, y);
+	printf("\33[%d;%dH|！！！！！！！！！！|", x + 3, y);
+	printf("\33[%d;%dH*——————————*", x + 4, y);
+	_getch();
 }
