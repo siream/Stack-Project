@@ -6,9 +6,9 @@ void JumpCursor(short, short);		//跳转光标至指定位置
 
 void InitFrame();					//初始化游戏边框
 
-void Ready(Hero* hero);				//开始界面
+Player Ready();				//开始界面
 
-void Menu(Hero* hero);				//菜单界面
+void Menu(Player*);					//菜单界面
 
 void Error();						//错误界面
 
@@ -27,7 +27,7 @@ void JumpCursor(short y, short x) {
 }
 
 /*开始界面*/
-void Ready(Hero* hero) {
+Player Ready() {
 	char name[nameLength];
 	InitFrame();
 	printf("\33[%d;%dH欢迎进入游戏", 12, 50);
@@ -35,38 +35,9 @@ void Ready(Hero* hero) {
 	SetCursor(TRUE);
 	JumpCursor(14, 52);
 	gets_s(name);
-	InitHero(hero, 0, name);
+	Player player = InitPlayer(name);
 	SetCursor(FLASE);
-}
-
-/*菜单界面*/
-void Menu(Hero* player) {
-	int x = 15;			//菜单位置
-	int y = 52;			//菜单位置
-	int distance = 3;		//菜单间隔
-	char choose;		//用户选择
-	InitFrame();
-	printf("\33[36m\33[%d;%dH尊贵的骑士：%s", 5, 10, player->name);
-	printf("\33[%d;%dH您拥有的金币：%d", 6, 10, player->attribute.gold);
-	printf("\33[36m\33[%d;%dH请选择你要做什么", 10, 49);
-	printf("\33[34m\33[%d;%dH——————————————\33[0m", 11, 43);
-	printf("\33[36m\33[%d;%dH请输入1-3\33[0m", 12, 52);
-	printf("\33[36m\33[%d;%dHo————o", x - 1, y);
-	printf("\33[%d;%dH|  战斗  |", x, y);
-	printf("\33[%d;%dH*————*", x + 1, y);
-	printf("\33[%d;%dHo————o", x + distance - 1, y);
-	printf("\33[%d;%dH|  商店  |", x + distance, y);
-	printf("\33[%d;%dH*————*", x + distance + 1, y);
-	printf("\33[%d;%dHo————o", x + distance * 2-1, y);
-	printf("\33[%d;%dH|  退出  |", x + distance * 2, y);
-	printf("\33[%d;%dH*————*", x + distance * 2+1, y);
-	choose = _getch();
-	switch (choose) {
-	case '1':FightMenu(player);break;
-	case '2':ShopMenu(player);break;
-	case '3':return ;
-	default:Error();break;
-	}
+	return player;
 }
 
 /*初始化游戏边框*/

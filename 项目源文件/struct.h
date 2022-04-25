@@ -12,16 +12,15 @@ typedef struct {
 	int type;				//类型
 }Dogface;
 
-/*军队*/
-typedef struct {
-	int ID;							//军队序号
-	Dogface dogface[armyLength];	//小兵
-	int top;						//栈顶
-}Army;
-
 /*英雄*/
 typedef struct {
-	Attribute attribute;			//属性
-	Army army;						//军队
+	int	ID;							//英雄ID
 	char name[nameLength];			//名字
 }Hero;
+
+/*玩家*/
+typedef struct {
+	char name[nameLength];			//玩家名称
+	int gold;						//玩家金币
+
+}Player;
