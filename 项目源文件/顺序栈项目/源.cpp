@@ -8,6 +8,7 @@
 #include "UI.h"
 #include "seqlist.h"
 #include "stack.h"
+#include "catch.h"
 
 int main() {
 	system("mode con cols=120 lines=40");		//设定控制台大小
