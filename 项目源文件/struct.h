@@ -1,4 +1,3 @@
-#include "define.h"
 /*实体属性*/
 typedef struct {
 	int HP;			//生命值
