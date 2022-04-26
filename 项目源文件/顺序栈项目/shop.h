@@ -1,7 +1,7 @@
-void InitFrame();
+ï»¿void InitFrame();
 
 void ShopMenu(Player* player) {
 	InitFrame();
-	printf("\33[%d;%dHÕâÊÇÒ»¸ö·Ç³£Å£±ÆµÄÉÌµê½çÃæ£¡", 10, 45);
+	printf("\33[%d;%dHè¿™æ˜¯ä¸€ä¸ªéå¸¸ç‰›é€¼çš„å•†åº—ç•Œé¢ï¼", 10, 45);
 	getchar();
 }

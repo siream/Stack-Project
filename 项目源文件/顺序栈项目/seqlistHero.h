@@ -1,38 +1,38 @@
-Hero catchHero(int);
+ï»¿Hero catchHero(int);
 
-/*³õÊ¼»¯±í*/
+/*åˆå§‹åŒ–è¡¨*/
 void InitHero(HeroList* list) {
 	list->length = 0;
 }
-/*Çó±í³¤*/
+/*æ±‚è¡¨é•¿*/
 int HeroLength(HeroList list) {
 	return list.length;
 }
-/*ÅÐÂú±í*/
+/*åˆ¤æ»¡è¡¨*/
 int HeroFull(HeroList list) {
 	if (list.length == heroNum)
 		return TRUE;
 	return FALSE;
 }
-/*ÅÐ¿Õ±í*/
+/*åˆ¤ç©ºè¡¨*/
 int HeroEmpty(HeroList list) {
 	if (list.length == 0)
 		return TRUE;
 	return FALSE;
 }
-/*²åÈë*/
+/*æ’å…¥*/
 int HeroInsert(HeroList* list, int i, Hero hero) {
 	if (HeroFull(*list))
 		return FALSE;
 	int j;
-	for (j = HeroLength(*list)-1;j > i-1;j--)
-		list->hero[j+1] = list->hero[j];
+	for (j = HeroLength(*list) - 1;j > i - 1;j--)
+		list->hero[j + 1] = list->hero[j];
 	list->hero[i] = hero;
 	list->length++;
 	return TRUE;
 }
 
-/*ÅÅÐò*/
+/*æŽ’åº*/
 void HeroSeq(HeroList* list) {
 	if (HeroEmpty(*list))
 		return;
@@ -44,14 +44,14 @@ void HeroSeq(HeroList* list) {
 				list->hero[i] = list->hero[j];
 				list->hero[j] = temp;
 			}
-			if (list->hero[i].ID==0) {
+			if (list->hero[i].ID == 0) {
 				temp = list->hero[i];
 				list->hero[i] = list->hero[j];
 				list->hero[j] = temp;
 			}
 		}
 }
-/*É¾³ý*/
+/*åˆ é™¤*/
 Hero HeroDelete(HeroList* list, int i) {
 	Hero out = list->hero[i - 1];
 	list->hero[i - 1] = catchHero(0);
@@ -59,7 +59,7 @@ Hero HeroDelete(HeroList* list, int i) {
 	list->length--;
 	return out;
 }
-/*»ñµÃ±øÖÖ*/
+/*èŽ·å¾—è‹±é›„*/
 int getHero(Player* player, int i) {
 	if (i > HeroLength(player->unHero))
 		return FALSE;

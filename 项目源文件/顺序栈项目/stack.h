@@ -1,30 +1,30 @@
-/*µÐ·½¾ü¶Ó*/
+ï»¿/*æ•Œæ–¹å†›é˜Ÿ*/
 typedef struct {
-	Dogface dogface[armyLength];	//Ð¡±ø
-	int top;						//Õ»¶¥
+	Dogface dogface[armyLength];	//å°å…µ
+	int top;						//æ ˆé¡¶
 }Army;
 
-/*³õÊ¼»¯Õ»*/
+/*åˆå§‹åŒ–æ ˆ*/
 void InitStack(Army* army) {
 	army->top = -1;
 }
-/*ÇóÕ»³¤*/
+/*æ±‚æ ˆé•¿*/
 int StackLength(Army army) {
 	return army.top + 1;
 }
-/*ÅÐÂúÕ»*/
+/*åˆ¤æ»¡æ ˆ*/
 int StackFull(Army army) {
 	if (army.top == armyLength - 1)
 		return TRUE;
 	return FALSE;
 }
-/*ÅÐ¿ÕÕ»*/
+/*åˆ¤ç©ºæ ˆ*/
 int StackEmpty(Army army) {
 	if (army.top == -1)
 		return TRUE;
 	return FALSE;
 }
-/*ÈëÕ»*/
+/*å…¥æ ˆ*/
 int StackPush(Army* army,Dogface dogface) {
 	if (StackFull(*army))
 		return FALSE;
@@ -32,7 +32,7 @@ int StackPush(Army* army,Dogface dogface) {
 	army->dogface[army->top] = dogface;
 	return TRUE;
 }
-/*³öÕ»*/
+/*å‡ºæ ˆ*/
 int StackPop(Army* army, Dogface* dogface) {
 	if (StackEmpty(*army))
 		return FALSE;

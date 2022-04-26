@@ -1,31 +1,14 @@
-/*»ñÈ¡Ğ¡±øÊôĞÔ*/
-Attribute catchAttribute(int i) {
-	/*ÊôĞÔÁĞ±í*/
-	/*ÉúÃüÖµ£¬¹¥»÷Á¦£¬·ÀÓùÁ¦£¬Ôì¼Û*/
-	Attribute aError = { -1,-1,-1,-1 };
-	Attribute a0 = { 0,0,0,0 };
-	Attribute a1 = { 100,10,10,10 };
-	Attribute a2 = { 200,10,10,10 };
-	Attribute a3 = { 200,20,20 ,20 };
-	/*·µ»ØÊôĞÔ*/
-	switch (i) {
-	case 0:return a0;
-	case 1:return a1;
-	case 2:return a2;
-	case 3:return a3;
-	default:return aError;
-	}
-}
-/*»ñÈ¡Ğ¡±ø*/
+ï»¿
+/*è·å–å°å…µ*/
 Dogface catchDogface(int i) {
-	/*Ğ¡±øÁĞ±í*/
-	/*Ãû³Æ,ÊôĞÔ£¬ID£¬ÉÌµê¼Û¸ñ*/
-	Dogface dError = {"ERROR", catchAttribute(-1),-1,-1};
-	Dogface d0 = { "NULL",catchAttribute(0),0,0};
-	Dogface d1 = { "µ¶µ¶¼§",catchAttribute(1),1,100};
-	Dogface d2 = { "Ğ¡Ä¢¹½",catchAttribute(2),2,200};
-	Dogface d3 = { "±¬ÆÆ¹í²Å",catchAttribute(3),3,300};
-	/*·µ»ØĞ¡±ø*/
+	/*å°å…µåˆ—è¡¨*/
+	/*åç§°,å±æ€§(ç”Ÿå‘½å€¼ï¼Œæ”»å‡»åŠ›ï¼Œé˜²å¾¡åŠ›ï¼Œé€ ä»·)ï¼ŒIDï¼Œå•†åº—ä»·æ ¼*/
+	Dogface dError = { "ERROR", {-1,-1,-1,-1},-1,-1 };
+	Dogface d0 = { "NULL",{0,0,0,0},0,0 };
+	Dogface d1 = { "åˆ€åˆ€å§¬",{100,10,10,10},1,100 };
+	Dogface d2 = { "å°è˜‘è‡",{200,10,10,20},2,200 };
+	Dogface d3 = { "çˆ†ç ´é¬¼æ‰",{200,20,20,50},3,300 };
+	/*è¿”å›å°å…µ*/
 	switch (i) {
 	case 0:return d0;
 	case 1:return d1;
@@ -34,16 +17,16 @@ Dogface catchDogface(int i) {
 	default:return dError;
 	}
 }
-/*»ñÈ¡Ó¢ĞÛ*/
+/*è·å–è‹±é›„*/
 Hero catchHero(int i) {
-	/*Ó¢ĞÛÁĞ±í*/
-	/*Ó¢ĞÛID£¬¼¼ÄÜID£¬Ãû×Ö£¬ÉÌµê¼Û¸ñ*/
+	/*è‹±é›„åˆ—è¡¨*/
+	/*è‹±é›„IDï¼ŒæŠ€èƒ½IDï¼Œåå­—ï¼Œå•†åº—ä»·æ ¼*/
 	Hero hError = { -1,-1,"ERROR",-1 };
 	Hero h0 = { 0,0,"NULL",0 };
-	Hero h1 = { 1,1,"ºúÌÒ",100 };
-	Hero h2 = { 2,2,"ÁÉÄşÅÜÄĞ",200 };
-	Hero h3 = { 3,3,"ÈıĞÕ¼ÒÅ«",300 };
-	/*·µ»ØÓ¢ĞÛ*/
+	Hero h1 = { 1,1,"åœŸå¾¡é—¨èƒ¡æ¡ƒ",100 };
+	Hero h2 = { 2,2,"è¾½å®è·‘ç”·å¥¥",200 };
+	Hero h3 = { 3,3,"ä¸‰å§“ä½¬å®¶å¥´",300 };
+	/*è¿”å›è‹±é›„*/
 	switch (i) {
 	case 0:return h0;
 	case 1:return h1;
@@ -51,4 +34,28 @@ Hero catchHero(int i) {
 	case 3:return h3;
 	default:return hError;
 	}
+}
+/*è·å–å…³å¡*/
+Army catchArmy(int i) {
+	Army army;
+	InitStack(&army);
+	/*å¡«å……å…³å¡armyæ ˆ*/
+	switch (i) {
+	case 0: {
+		while (!StackPush(&army, catchDogface(0)));
+	};break;
+	case 1: {
+		while (!StackPush(&army, catchDogface(1)));
+	};break;
+	case 2: {
+		for (i = 0;i < armyLength / 2;i++)
+			StackPush(&army, catchDogface(1));
+		while (!StackPush(&army, catchDogface(2)));
+	};break;
+	default: {
+		while (!StackPush(&army, catchDogface(-1)));
+	};break;
+	}
+	/*è¿”å›å…³å¡armyæ ˆ*/
+	return army;
 }

@@ -1,45 +1,45 @@
-/*ÊµÌåÊôĞÔ*/
+ï»¿/*å®ä½“å±æ€§*/
 typedef struct {
-	int HP;			//ÉúÃüÖµ
-	int ATK;		//¹¥»÷Á¦
-	int DEF;		//·ÀÓùÁ¦
-	int gold;		//Ôì¼Û
+	int HP;			//ç”Ÿå‘½å€¼
+	int ATK;		//æ”»å‡»åŠ›
+	int DEF;		//é˜²å¾¡åŠ›
+	int gold;		//é€ ä»·
 }Attribute;
 
-/*Ğ¡±ø*/
+/*å°å…µ*/
 typedef struct {
-	char name[nameLength];	//Ãû³Æ
-	Attribute attribute;	//ÊôĞÔ
+	char name[nameLength];	//åç§°
+	Attribute attribute;	//å±æ€§
 	int ID;					//ID
-	int diamond;			//ÉÌµê¼Û¸ñ
+	int diamond;			//å•†åº—ä»·æ ¼
 }Dogface;
 
-/*Ó¢ĞÛ*/
+/*è‹±é›„*/
 typedef struct {
-	int	ID;							//Ó¢ĞÛID
-	int IDskill;					//¼¼ÄÜID
-	char name[nameLength];			//Ãû×Ö
-	int diamond;					//ÉÌµê¼Û¸ñ
+	int	ID;							//è‹±é›„ID
+	int IDskill;					//æŠ€èƒ½ID
+	char name[nameLength];			//åå­—
+	int diamond;					//å•†åº—ä»·æ ¼
 }Hero;
 
-/*Ó¢ĞÛË³Ğò±í*/
+/*è‹±é›„é¡ºåºè¡¨*/
 typedef struct {
 	Hero hero[heroNum];
 	int length;
 }HeroList;
 
-/*±øÖÖË³Ğò±í*/
+/*å…µç§é¡ºåºè¡¨*/
 typedef struct {
 	Dogface dogface[dogfaceNum];
 	int length;
 }DogfaceList;
 
-/*Íæ¼Ò*/
+/*ç©å®¶*/
 typedef struct {
-	char name[nameLength];			//Íæ¼ÒÃû³Æ
-	int diamond;					//Íæ¼Ò×êÊ¯
-	HeroList ownHero;				//ÒÑÓĞÓ¢ĞÛ
-	HeroList unHero;				//Î´ÓĞÓ¢ĞÛ
-	DogfaceList ownDogface;			//ÒÑÓĞ±øÖÖ
-	DogfaceList unDogface;			//Î´ÓĞ±øÖÖ
+	char name[nameLength];			//ç©å®¶åç§°
+	int diamond;					//ç©å®¶é’»çŸ³
+	HeroList ownHero;				//å·²æœ‰è‹±é›„
+	HeroList unHero;				//æœªæœ‰è‹±é›„
+	DogfaceList ownDogface;			//å·²æœ‰å…µç§
+	DogfaceList unDogface;			//æœªæœ‰å…µç§
 }Player;

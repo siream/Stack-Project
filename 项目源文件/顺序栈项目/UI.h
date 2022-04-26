@@ -1,38 +1,38 @@
-#include "entity.h"
+ï»¿#include "entity.h"
 #include "shop.h"
 #include "fight.h"
 
 Player InitPlayer(char name[nameLength]);
 
-void SetCursor(int);				//ÉèÖÃ¹â±ê
-void JumpCursor(short, short);		//Ìø×ª¹â±êÖÁÖ¸¶¨Î»ÖÃ
-void InitFrame();					//³õÊ¼»¯ÓÎÏ·±ß¿ò
-Player Ready();						//¿ªÊ¼½çÃæ
-void Menu(Player*);					//²Ëµ¥½çÃæ
-void Error();						//´íÎó½çÃæ
+void SetCursor(int);				//è®¾ç½®å…‰æ ‡
+void JumpCursor(short, short);		//è·³è½¬å…‰æ ‡è‡³æŒ‡å®šä½ç½®
+void InitFrame();					//åˆå§‹åŒ–æ¸¸æˆè¾¹æ¡†
+Player Ready();						//å¼€å§‹ç•Œé¢
+void Menu(Player*);					//èœå•ç•Œé¢
+void Error();						//é”™è¯¯ç•Œé¢
 
-/*²Ëµ¥½çÃæ*/
+/*èœå•ç•Œé¢*/
 void Menu(Player* player) {
-	int x = 15;				//²Ëµ¥Î»ÖÃ
-	int y = 52;				//²Ëµ¥Î»ÖÃ
-	int distance = 3;		//²Ëµ¥¼ä¸ô
-	char choose;			//ÓÃ»§Ñ¡Ôñ
+	int x = 15;				//èœå•ä½ç½®
+	int y = 52;				//èœå•ä½ç½®
+	int distance = 3;		//èœå•é—´éš”
+	char choose;			//ç”¨æˆ·é€‰æ‹©
 head:
 	InitFrame();
-	printf("\33[36m\33[%d;%dH×ğ¹óµÄ³ÇÖ÷£º%s", 5, 10, player->name);
-	printf("\33[%d;%dHÄúÓµÓĞµÄ×êÊ¯£º%d", 6, 10, player->diamond);
-	printf("\33[36m\33[%d;%dHÇëÑ¡ÔñÄãÒª×öÊ²Ã´", 10, 49);
-	printf("\33[34m\33[%d;%dH¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª\33[0m", 11, 43);
-	printf("\33[36m\33[%d;%dHÇëÊäÈë1-3\33[0m", 12, 52);
-	printf("\33[36m\33[%d;%dHo¡ª¡ª¡ª¡ªo", x - 1, y);
-	printf("\33[%d;%dH|  Õ½¶·  |", x, y);
-	printf("\33[%d;%dH*¡ª¡ª¡ª¡ª*", x + 1, y);
-	printf("\33[%d;%dHo¡ª¡ª¡ª¡ªo", x + distance - 1, y);
-	printf("\33[%d;%dH|  ÉÌµê  |", x + distance, y);
-	printf("\33[%d;%dH*¡ª¡ª¡ª¡ª*", x + distance + 1, y);
-	printf("\33[%d;%dHo¡ª¡ª¡ª¡ªo", x + distance * 2 - 1, y);
-	printf("\33[%d;%dH|  ÍË³ö  |", x + distance * 2, y);
-	printf("\33[%d;%dH*¡ª¡ª¡ª¡ª*", x + distance * 2 + 1, y);
+	printf("\33[36m\33[%d;%dHå°Šè´µçš„åŸä¸»ï¼š%s", 5, 10, player->name);
+	printf("\33[%d;%dHæ‚¨æ‹¥æœ‰çš„é’»çŸ³ï¼š%d", 6, 10, player->diamond);
+	printf("\33[36m\33[%d;%dHè¯·é€‰æ‹©ä½ è¦åšä»€ä¹ˆ", 10, 49);
+	printf("\33[34m\33[%d;%dHâ€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”\33[0m", 11, 43);
+	printf("\33[36m\33[%d;%dHè¯·è¾“å…¥1-3\33[0m", 12, 52);
+	printf("\33[36m\33[%d;%dHoâ€”â€”â€”â€”o", x - 1, y);
+	printf("\33[%d;%dH|  æˆ˜æ–—  |", x, y);
+	printf("\33[%d;%dH*â€”â€”â€”â€”*", x + 1, y);
+	printf("\33[%d;%dHoâ€”â€”â€”â€”o", x + distance - 1, y);
+	printf("\33[%d;%dH|  å•†åº—  |", x + distance, y);
+	printf("\33[%d;%dH*â€”â€”â€”â€”*", x + distance + 1, y);
+	printf("\33[%d;%dHoâ€”â€”â€”â€”o", x + distance * 2 - 1, y);
+	printf("\33[%d;%dH|  é€€å‡º  |", x + distance * 2, y);
+	printf("\33[%d;%dH*â€”â€”â€”â€”*", x + distance * 2 + 1, y);
 	choose = _getch();
 	switch (choose) {
 	case '1':FightMenu(player);goto head;
@@ -42,26 +42,26 @@ head:
 	}
 }
 
-/*ÉèÖÃ¹â±ê*/
-/*´«ÈëFALSEÔòÒş²Ø¹â±ê*/
-/*´«ÈëTRUEÔòÏÔÊ¾¹â±ê*/
+/*è®¾ç½®å…‰æ ‡*/
+/*ä¼ å…¥FALSEåˆ™éšè—å…‰æ ‡*/
+/*ä¼ å…¥TRUEåˆ™æ˜¾ç¤ºå…‰æ ‡*/
 void SetCursor(int i) {
 	CONSOLE_CURSOR_INFO cursor{ 1,i };
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor);
 }
-/*Ìø×ª¹â±êÖÁÖ¸¶¨×ø±ê*/
-/*xÎªµÚ¼¸ĞĞ£¬yÎªµÚ¼¸ÁĞ£¬´Ó1¿ªÊ¼*/
+/*è·³è½¬å…‰æ ‡è‡³æŒ‡å®šåæ ‡*/
+/*xä¸ºç¬¬å‡ è¡Œï¼Œyä¸ºç¬¬å‡ åˆ—ï¼Œä»1å¼€å§‹*/
 void JumpCursor(short y, short x) {
 	COORD pos = { x - 1,y - 1 };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
-/*¿ªÊ¼½çÃæ*/
+/*å¼€å§‹ç•Œé¢*/
 Player Ready() {
 	char name[nameLength];
 	InitFrame();
-	printf("\33[%d;%dH»¶Ó­½øÈëÓÎÏ·", 12, 50);
-	printf("\33[%d;%dHÇëÊäÈëÄãµÄÃû×Ö", 13, 49);
+	printf("\33[%d;%dHæ¬¢è¿è¿›å…¥æ¸¸æˆ", 12, 50);
+	printf("\33[%d;%dHè¯·è¾“å…¥ä½ çš„åå­—", 13, 49);
 	SetCursor(TRUE);
 	JumpCursor(14, 52);
 	gets_s(name);
@@ -70,13 +70,13 @@ Player Ready() {
 	return player;
 }
 
-/*³õÊ¼»¯ÓÎÏ·±ß¿ò*/
+/*åˆå§‹åŒ–æ¸¸æˆè¾¹æ¡†*/
 void InitFrame() {
 	system("CLS");
-	int color1 = 30;		//±ß¿òÇ°¾°É«(·¶Î§30-37)
-	int color2 = 43;		//±ß¿òºó¾°É«£¨·¶Î§40-47£©
-	char top[3] = "¡è";		//ÉÏÏÂ±ß¿ò²ÄÖÊ
-	char side[3] = "||";	//×óÓÒ±ß¿ò²ÄÖÊ
+	int color1 = 30;		//è¾¹æ¡†å‰æ™¯è‰²(èŒƒå›´30-37)
+	int color2 = 43;		//è¾¹æ¡†åæ™¯è‰²ï¼ˆèŒƒå›´40-47ï¼‰
+	char top[3] = "Â¤";		//ä¸Šä¸‹è¾¹æ¡†æè´¨
+	char side[3] = "||";	//å·¦å³è¾¹æ¡†æè´¨
 	for (int i = 1;i < COL;i++)
 		for (int j = 1;j <= ROW;j++) {
 			if (i == 1 || i == COL - 1)
@@ -87,14 +87,14 @@ void InitFrame() {
 		}
 }
 
-/*´íÎó½çÃæ*/
+/*é”™è¯¯ç•Œé¢*/
 void Error() {
 	int x = ROW / 2 - 3;
 	int y = 46;
-	printf("\33[31m\33[%d;%dH*¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª*", x, y);
-	printf("\33[%d;%dH|£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡|", x + 1, y);
-	printf("\33[%d;%dH|£¡ÇëÊäÈëÕıÈ·µÄÑ¡Ïî£¡|", x + 2, y);
-	printf("\33[%d;%dH|£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡|", x + 3, y);
-	printf("\33[%d;%dH*¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª*", x + 4, y);
+	printf("\33[31m\33[%d;%dH*â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”*", x, y);
+	printf("\33[%d;%dH|ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼|", x + 1, y);
+	printf("\33[%d;%dH|ï¼è¯·è¾“å…¥æ­£ç¡®çš„é€‰é¡¹ï¼|", x + 2, y);
+	printf("\33[%d;%dH|ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼|", x + 3, y);
+	printf("\33[%d;%dH*â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”*", x + 4, y);
 	_getch();
 }
