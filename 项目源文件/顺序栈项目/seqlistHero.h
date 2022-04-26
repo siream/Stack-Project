@@ -27,7 +27,7 @@ int HeroInsert(HeroList* list, int i, Hero hero) {
 	int j;
 	for (j = HeroLength(*list)-1;j > i-1;j--)
 		list->hero[j+1] = list->hero[j];
-	list->hero[j] = hero;
+	list->hero[i] = hero;
 	list->length++;
 	return TRUE;
 }
@@ -60,7 +60,8 @@ Hero HeroDelete(HeroList* list, int i) {
 	return out;
 }
 /*»ñµÃ±øÖÖ*/
-void getHero(Player* player, int i) {
-	HeroInsert(&player->ownHero, 1, HeroDelete(&player->unHero, i));
+int getHero(Player* player, int i) {
+	HeroInsert(&player->ownHero, 0, HeroDelete(&player->unHero, i));
 	HeroSeq(&player->ownHero);
+	return 0;
 }

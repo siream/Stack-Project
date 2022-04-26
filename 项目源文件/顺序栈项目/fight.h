@@ -1,5 +1,5 @@
 void InitFrame();
-void getHero(Player*, int);
+int getHero(Player*, int);
 int HeroLength(HeroList);
 
 void FightMenu(Player* player) {
