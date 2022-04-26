@@ -3,8 +3,8 @@ void InitFrame();					//初始化边框
 int HeroLength(HeroList);			//英雄表长
 int DogfaceLength(DogfaceList);		//小兵表长
 
-int Fight(Player, int);			//战斗
-
+int Fight(Player, int);					//战斗
+void Menu(Player player, char menu);	//操作列表
 /*关卡选择*/
 void FightMenu(Player* player) {
 	char choosech;
@@ -34,16 +34,49 @@ void FightMenu(Player* player) {
 	}
 }
 /*战斗*/
-int Fight(Player player, int choose) {
-
+int Fight(Player player, int level) {
+	char choosech;
+	int choose;
+	char menu = 'b';
+	int i = 400;
+	InitFrame();
+	Menu(player, menu);
 	while (1) {
-		InitFrame();
-		printf("\33[%d;%dH你的英雄",30,10);
-		for (int i = 0;i < 1;i++) {
-			printf("\33[%d;%dH\\============/",31,10+i*20);
-			printf("\33[%d;%dH|*%10s*|",32,10+i*20,player.unHero.hero[0].name);
-			printf("\33[%d;%dH/============\\",33,10+i*20);
+		if (i < 0)
+			i = 400;
+		while (i--) {
+			printf("\33[%d;%dH%d", 20 + (i % 10), 20, i);
+			if (_kbhit()) {
+				choosech = _getch();
+				if (choosech > '0' && choosech <= '9') {
+					choose = choosech - 48;
+				}
+				else
+					if (menu == 'a') {
+						menu = 'b';
+						Menu(player, menu);
+					}
+					else {
+						menu = 'a';
+						Menu(player, menu);
+					}
+			}
+
 		}
-		_getch();
+	}
+}
+/*操作列表*/
+void Menu(Player player, char menu) {
+	if (menu == 'a') {
+		printf("\33[%d;%dH你的英雄", 30, 12);
+		for (int i = 0;i < 9;i++) {
+			printf("\33[%d;%dH%d.%-10s 金币：%d", 32 + 2 * (i / 3), 12 + 24 * (i % 3), i + 1, player.unHero.hero[1].name, player.unHero.hero[1].gold);
+		}
+	}
+	else if (menu == 'b') {
+		printf("\33[%d;%dH你的小兵", 30, 12);
+		for (int i = 0;i < 9;i++) {
+			printf("\33[%d;%dH%d.%-10s 金币：%d", 32 + 2 * (i / 3), 12 + 24 * (i % 3), i + 1, player.unDogface.dogface[2].name, player.unDogface.dogface[2].attribute.gold);
+		}
 	}
 }

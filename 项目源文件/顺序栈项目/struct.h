@@ -20,6 +20,7 @@ typedef struct {
 	int IDskill;					//技能ID
 	char name[nameLength];			//名字
 	int diamond;					//商店价格
+	int gold;						//技能消耗
 }Hero;
 
 /*英雄顺序表*/
