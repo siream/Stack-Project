@@ -61,7 +61,9 @@ Hero HeroDelete(HeroList* list, int i) {
 }
 /*»ñµÃ±øÖÖ*/
 int getHero(Player* player, int i) {
+	if (i > HeroLength(player->unHero))
+		return FALSE;
 	HeroInsert(&player->ownHero, 0, HeroDelete(&player->unHero, i));
 	HeroSeq(&player->ownHero);
-	return 0;
+	return TRUE;
 }
