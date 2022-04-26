@@ -8,6 +8,7 @@ typedef struct {
 
 /*小兵*/
 typedef struct {
+	char name[nameLength];	//名称
 	Attribute attribute;	//属性
 	int ID;					//ID
 	int diamond;			//商店价格

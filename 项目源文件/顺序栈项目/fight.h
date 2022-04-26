@@ -1,6 +1,7 @@
 void InitFrame();
 int getHero(Player*, int);
 int HeroLength(HeroList);
+int DogfaceLength(DogfaceList);
 
 void FightMenu(Player* player) {
 	while (1) {
@@ -18,14 +19,8 @@ void FightMenu(Player* player) {
 		printf("\33[%d;%dH当前英雄：", 10, 40);
 		for (int i = 0;i < HeroLength(player->ownHero);i++)
 			printf("\33[%d;%dH%s", 12 + 2 * i, 40, player->ownHero.hero[i].name);
-		printf("\33[%d;%dH未有英雄:", 18, 40);
-		for (int i = 0;i < HeroLength(player->unHero);i++)
-			printf("\33[%d;%dH%s", 20 + 2 * i, 40, player->unHero.hero[i].name);
-		char choose = _getch();
-		switch (choose) {
-		case '1':getHero(player, 1);break;
-		case '2':getHero(player, 2);break;
-		case '3':getHero(player, 3);break;
-		}
+		printf("\33[%d;%dH当前小兵:", 18, 40);
+		for (int i = 0;i < DogfaceLength(player->ownDogface);i++)
+			printf("\33[%d;%dH%s", 20 + 2 * i, 40, player->ownDogface.dogface[i].name);
 	}
 }

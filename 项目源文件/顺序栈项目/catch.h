@@ -19,12 +19,12 @@ Attribute catchAttribute(int i) {
 /*获取小兵*/
 Dogface catchDogface(int i) {
 	/*小兵列表*/
-	/*属性，ID，商店价格*/
-	Dogface dError = { catchAttribute(-1),-1,-1 };
-	Dogface d0 = { catchAttribute(0),0,0 };
-	Dogface d1 = { catchAttribute(1),1,100 };
-	Dogface d2 = { catchAttribute(2),2,200 };
-	Dogface d3 = { catchAttribute(3),3,300 };
+	/*名称,属性，ID，商店价格*/
+	Dogface dError = {"ERROR", catchAttribute(-1),-1,-1};
+	Dogface d0 = { "NULL",catchAttribute(0),0,0};
+	Dogface d1 = { "刀刀姬",catchAttribute(1),1,100};
+	Dogface d2 = { "小蘑菇",catchAttribute(2),2,200};
+	Dogface d3 = { "爆破鬼才",catchAttribute(3),3,300};
 	/*返回小兵*/
 	switch (i) {
 	case 0:return d0;
@@ -38,7 +38,7 @@ Dogface catchDogface(int i) {
 Hero catchHero(int i) {
 	/*英雄列表*/
 	/*英雄ID，技能ID，名字，商店价格*/
-	Hero hError = { -1,-1,ERROR,-1 };
+	Hero hError = { -1,-1,"ERROR",-1 };
 	Hero h0 = { 0,0,"NULL",0 };
 	Hero h1 = { 1,1,"胡桃",100 };
 	Hero h2 = { 2,2,"辽宁跑男",200 };
