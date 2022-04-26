@@ -35,13 +35,16 @@
     <ClInclude Include="shop.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="seqlist.h">
+    <ClInclude Include="seqlistHero.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="stack.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="catch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="seqlistDogface.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

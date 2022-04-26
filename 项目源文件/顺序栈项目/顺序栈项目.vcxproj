@@ -144,8 +144,9 @@
   <ItemGroup>
     <ClInclude Include="catch.h" />
     <ClInclude Include="define.h" />
+    <ClInclude Include="seqlistDogface.h" />
     <ClInclude Include="fight.h" />
-    <ClInclude Include="seqlist.h" />
+    <ClInclude Include="seqlistHero.h" />
     <ClInclude Include="shop.h" />
     <ClInclude Include="stack.h" />
     <ClInclude Include="struct.h" />
