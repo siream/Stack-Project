@@ -29,9 +29,6 @@
     <ClInclude Include="UI.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="entity.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="fight.h">
       <Filter>头文件</Filter>
     </ClInclude>

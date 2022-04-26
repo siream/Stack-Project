@@ -17,3 +17,14 @@ int main() {
 	Menu(&player);
 }
 
+/*初始化玩家*/
+Player InitPlayer(char name[nameLength]) {
+	Player player;
+	player.diamond = 0;
+	strcpy_s(player.name, name);
+	InitHero(&player.ownHero);
+	InitHero(&player.unHero);
+	InitDogface(&player.ownDogface);
+	InitDogface(&player.unDogface);
+	return player;
+}
