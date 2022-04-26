@@ -1,17 +1,16 @@
 #include "entity.h"
 #include "shop.h"
 #include "fight.h"
-void SetCursor(int);				//设置光标
-void JumpCursor(short, short);		//跳转光标至指定位置
 
-void InitFrame();					//初始化游戏边框
+Player InitPlayer(char name[nameLength]);		//初始化玩家
 
-Player Ready();						//开始界面
-
-void Menu(Player*);					//菜单界面
-
-void Error();						//错误界面
-
+void SetCursor(int);							//设置光标
+void JumpCursor(short, short);					//跳转光标至指定位置
+void InitFrame();								//初始化游戏边框
+Player Ready();									//开始界面
+void Menu(Player*);								//菜单界面
+void Error();									//错误界面
+	
 /*菜单界面*/
 void Menu(Player* player) {
 	int x = 15;				//菜单位置
