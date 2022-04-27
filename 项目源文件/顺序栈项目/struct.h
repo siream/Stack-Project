@@ -44,3 +44,9 @@ typedef struct {
 	DogfaceList ownDogface;			//已有兵种
 	DogfaceList unDogface;			//未有兵种
 }Player;
+
+/*敌方军队*/
+typedef struct {
+	Dogface dogface[armyLength];	//小兵
+	int top;						//栈顶
+}Army;

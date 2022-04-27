@@ -1,8 +1,4 @@
-﻿/*敌方军队*/
-typedef struct {
-	Dogface dogface[armyLength];	//小兵
-	int top;						//栈顶
-}Army;
+﻿
 
 /*初始化栈*/
 void InitStack(Army* army) {
