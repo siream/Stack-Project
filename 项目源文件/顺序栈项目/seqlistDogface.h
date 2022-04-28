@@ -24,7 +24,7 @@ int DogfaceInsert(DogfaceList* list, int i, Dogface dogface) {
 	if (DogfaceFull(*list))
 		return FALSE;
 	int j;
-	for (j = DogfaceLength(*list);j > i-1;j--)
+	for (j = DogfaceLength(*list)-1;j > i-1;j--)
 		list->dogface[j + 1] = list->dogface[j];
 	list->dogface[i] = dogface;
 	list->length++;
