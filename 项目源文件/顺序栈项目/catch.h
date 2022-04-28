@@ -1,5 +1,6 @@
 ﻿int StackPush(Army*, Dogface);
 void InitStack(Army* army);
+int StackPop(Army* army, Dogface* dogface);
 /*获取小兵*/
 Dogface catchDogface(int i) {
 	/*小兵列表*/
@@ -53,6 +54,11 @@ Army catchArmy(int i) {
 			StackPush(&army, catchDogface(1));
 		while (StackPush(&army, catchDogface(2)));
 	};break;
+	case 3: {
+		for (i = 0;i < armyLength / 2;i++)
+			StackPush(&army, catchDogface(2));
+		while (StackPush(&army, catchDogface(3)));
+	}
 	default: {
 		while (StackPush(&army, catchDogface(-1)));
 	};break;
@@ -61,6 +67,22 @@ Army catchArmy(int i) {
 	return army;
 }
 /*获取技能*/
-void catchSkill(Army* player, Army* mob, int i) {
-
+void catchSkill(Army* player, Army* mob, int i, int HP, int gold) {
+	Dogface x;
+	switch (i) {
+	case 1: {
+		player->dogface[player->top].attribute.HP += 100;
+		printf("\33[33m\33[%d;%dH你使用了技能，己方生命值增加100！", 25, 40);
+	};return;
+	case 2: {
+		mob->dogface[mob->top].attribute.HP -= 100;
+		printf("\33[33m\33[%d;%dH你使用了技能，敌方生命值降低100！", 25, 40);
+	};return;
+	case 3: {
+		StackPop(player, &x);
+		StackPop(mob, &x);
+		printf("\33[33m\33[%d;%dH你使用了技能，双方小兵同归于尽！", 25, 40);
+	};return;
+	default:return;
+	}
 }

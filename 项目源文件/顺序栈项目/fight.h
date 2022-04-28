@@ -9,11 +9,13 @@ int HeroLength(HeroList);			//英雄表长
 int DogfaceLength(DogfaceList);		//小兵表长
 
 int Fight(Player, int);					//战斗
-void Menu(Player, char);			//操作列表
+void Menu(Player, char);				//操作列表
 void home(int HP);						//城堡
 void entity(Army player, Army mob);		//实体
 void fighting(Army*, Army*, int*);		//战斗计算
 int Death(Army*, Army*, int*);			//死亡
+void Full();							//栈满
+void NoGold();							//金币不足
 
 /*关卡选择*/
 void FightMenu(Player* player) {
@@ -51,13 +53,11 @@ int Fight(Player player, int level) {
 	/*双方army栈*/
 	Army playerArmy;
 	InitStack(&playerArmy);
-	Army mobArmy = catchArmy(level);
+	Army mobArmy = catchArmy(level-1);
 	/*玩家*/
 	int gold = 20;		//金币
 	int HP = 5000;		//血量
 	int i = 1;
-	/*坐标信息*/
-	int xy[13][13] = { { 0 },{0} };
 	InitFrame();
 	Menu(player, menu);
 	printf("\33[36m\33[%d;%dH金币:%-10d", 29, 12, gold);
@@ -69,30 +69,36 @@ int Fight(Player player, int level) {
 					choose = choosech - 48;
 					if (menu == 'a') {
 						if (choose <= player.ownHero.length)
-							if (gold >= player.ownHero.hero[choose-1].gold) {
+							if (gold >= player.ownHero.hero[choose - 1].gold) {
 								gold -= player.ownHero.hero[choose - 1].gold;
-								catchSkill(&playerArmy, &mobArmy, choose);////使用技能
+								catchSkill(&playerArmy, &mobArmy, choose,HP,gold);////使用技能
 								printf("\33[36m\33[%d;%dH金币:%-10d", 29, 12, gold);
 								goto entity;
 							}
-							else
-								break;////金币不足
+							else {
+								NoGold();////金币不足
+								goto entity;
+							}
 						else
 							break;////没有英雄
 					}
 					else {
-						if (choose <= player.unDogface.length)
+						if (choose <= player.ownDogface.length)
 							if (!StackFull(playerArmy))
-								if (gold >= player.unDogface.dogface[choose-1].attribute.gold) {
-									gold -= player.unDogface.dogface[choose-1].attribute.gold;
-									StackPush(&playerArmy, player.unDogface.dogface[choose-1]);
+								if (gold >= player.ownDogface.dogface[choose - 1].attribute.gold) {
+									gold -= player.ownDogface.dogface[choose - 1].attribute.gold;
+									StackPush(&playerArmy, player.ownDogface.dogface[choose - 1]);
 									printf("\33[36m\33[%d;%dH金币:%-10d", 29, 12, gold);
 									goto entity;
 								}
-								else
-									break;////金币不足
-							else
-								break;////栈满
+								else{
+									NoGold();////金币不足
+									goto entity;
+								}
+							else{
+								Full();////栈满
+								goto entity;
+							}
 						else
 							break;////没有小兵
 					}
@@ -136,14 +142,14 @@ int Fight(Player player, int level) {
 void Menu(Player player, char menu) {
 	if (menu == 'a') {
 		printf("\33[36m\33[%d;%dH你的英雄", 30, 12);
-		for (int i = 0;i < heroNum;i++) {
-			printf("\33[%d;%dH|*  %d.%-10s  金币：%d  *|", 32 + 2 * (i / 3), 12 + 30 * (i % 3), i + 1, player.unHero.hero[i].name, player.unHero.hero[i].gold);
+		for (int i = 0;i < player.ownHero.length;i++) {
+			printf("\33[%d;%dH|*  %d.%-10s  金币：%d  *|", 32 + 2 * (i / 3), 12 + 30 * (i % 3), i + 1, player.ownHero.hero[i].name, player.unHero.hero[i].gold);
 		}
 	}
 	else if (menu == 'b') {
 		printf("\33[36m\33[%d;%dH你的小兵", 30, 12);
-		for (int i = 0;i < dogfaceNum;i++) {
-			printf("\33[36m\33[%d;%dH|*  %d.%-10s  金币：%d  *|\33[0m", 32 + 2 * (i / 3), 12 + 30 * (i % 3), i + 1, player.unDogface.dogface[i].name, player.unDogface.dogface[i].attribute.gold);
+		for (int i = 0;i < player.ownDogface.length;i++) {
+			printf("\33[36m\33[%d;%dH|*  %d.%-10s  金币：%d  *|\33[0m", 32 + 2 * (i / 3), 12 + 30 * (i % 3), i + 1, player.ownDogface.dogface[i].name, player.unDogface.dogface[i].attribute.gold);
 		}
 	}
 }
@@ -231,4 +237,36 @@ int Death(Army* player, Army* mob, int* HP) {
 	if (*HP <= 0)
 		return DEATH;
 	return 0;
+}
+/*栈满*/
+void Full() {
+	int x = ROW / 2 - 3;
+	int y = 46;
+	printf("\33[31m\33[%d;%dH*——————————*", x, y);
+	printf("\33[%d;%dH|！！！！！！！！！！|", x + 1, y);
+	printf("\33[%d;%dH|！！！队伍已满！！！|", x + 2, y);
+	printf("\33[%d;%dH|！！！！！！！！！！|", x + 3, y);
+	printf("\33[%d;%dH*——————————*", x + 4, y);
+	Sleep(200);
+	printf("\33[30m\33[%d;%dH*——————————*", x, y);
+	printf("\33[%d;%dH|！！！！！！！！！！|", x + 1, y);
+	printf("\33[%d;%dH|！！！队伍已满！！！|", x + 2, y);
+	printf("\33[%d;%dH|！！！！！！！！！！|", x + 3, y);
+	printf("\33[%d;%dH*——————————*", x + 4, y);
+}
+/*金币不足*/
+void NoGold() {
+	int x = ROW / 2 - 3;
+	int y = 46;
+	printf("\33[31m\33[%d;%dH*——————————*", x, y);
+	printf("\33[%d;%dH|！！！！！！！！！！|", x + 1, y);
+	printf("\33[%d;%dH|！！！金币不足！！！|", x + 2, y);
+	printf("\33[%d;%dH|！！！！！！！！！！|", x + 3, y);
+	printf("\33[%d;%dH*——————————*", x + 4, y);
+	Sleep(200);
+	printf("\33[30m\33[%d;%dH*——————————*", x, y);
+	printf("\33[%d;%dH|！！！！！！！！！！|", x + 1, y);
+	printf("\33[%d;%dH|！！！金币不足！！！|", x + 2, y);
+	printf("\33[%d;%dH|！！！！！！！！！！|", x + 3, y);
+	printf("\33[%d;%dH*——————————*", x + 4, y);
 }
