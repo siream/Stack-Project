@@ -25,7 +25,7 @@ void FightMenu(Player* player) {
 		InitFrame();
 		int x;
 		int y;
-		printf("\33[36m\33[%d;%dH选择你的关卡", 5, 10);
+		printf("\33[36m\33[%d;%dH选择你的关卡（Esc返回）", 5, 10);
 		for (int i = 0;i < levelNum;i++) {
 			x = 11 + 8 * ((i) % 3);
 			y = 13 + ((i / 3) * 20);
@@ -37,12 +37,37 @@ void FightMenu(Player* player) {
 		}
 		choosech = _getch();
 		choose = choosech - 48;
+		if (choosech == 27)
+			return;
 		if (choose<1 || choose>levelNum) {
 			Error();
 			continue;
 		}
-		if (Fight(*player, choose))
-			continue;
+		if (Fight(*player, choose)) {
+			/*失败*/
+			int x = ROW / 2 - 3;
+			int y = 46;
+			printf("\33[31m\33[%d;%dH*——————————*", x, y);
+			printf("\33[%d;%dH|！！！！！！！！！！|", x + 1, y);
+			printf("\33[%d;%dH|！很遗憾，你失败了！|", x + 2, y);
+			printf("\33[%d;%dH|！！！！！！！！！！|", x + 3, y);
+			printf("\33[%d;%dH*——————————*", x + 4, y);
+			_getch();
+		}
+		else {
+			/*胜利*/
+			player->diamond += choose * 200;
+			int x = ROW / 2 - 3;
+			int y = 46;
+			printf("\33[31m\33[%d;%dH*——————————*", x, y);
+			printf("\33[%d;%dH|！！！！！！！！！！|", x + 1, y);
+			printf("\33[%d;%dH|！！！！胜利！！！！|", x + 2, y);
+			printf("\33[%d;%dH|！！！！！！！！！！|", x + 3, y);
+			printf("\33[%d;%dH|！！获得%-4d钻石！！|", x + 4, y,choose*200);
+			printf("\33[%d;%dH|！！！！！！！！！！|", x + 5, y);
+			printf("\33[%d;%dH*——————————*", x + 6, y);
+			_getch();
+		}
 	}
 }
 /*战斗*/
@@ -53,10 +78,10 @@ int Fight(Player player, int level) {
 	/*双方army栈*/
 	Army playerArmy;
 	InitStack(&playerArmy);
-	Army mobArmy = catchArmy(level-1);
+	Army mobArmy = catchArmy(level);
 	/*玩家*/
 	int gold = 20;		//金币
-	int HP = 5000;		//血量
+	int HP = 500;		//血量
 	int i = 1;
 	InitFrame();
 	Menu(player, menu);
@@ -71,7 +96,7 @@ int Fight(Player player, int level) {
 						if (choose <= player.ownHero.length)
 							if (gold >= player.ownHero.hero[choose - 1].gold) {
 								gold -= player.ownHero.hero[choose - 1].gold;
-								catchSkill(&playerArmy, &mobArmy, choose,HP,gold);////使用技能
+								catchSkill(&playerArmy, &mobArmy, choose,&HP,&gold);////使用技能
 								printf("\33[36m\33[%d;%dH金币:%-10d", 29, 12, gold);
 								goto entity;
 							}
